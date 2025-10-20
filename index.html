@@ -211,4 +211,53 @@
           <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem">
             <button type="submit" class="cta">Send</button>
             <a class="outline" href="tel:+17657772646">Call</a>
-            <a class="outli
+            <a class="outline" href="mailto:support@halvynor.shop">Email</a>
+          </div>
+          <p class="muted" style="margin-top:.6rem">We reply quickly during business hours.</p>
+        </form>
+        <div class="card reveal">
+          <div class="contact-list">
+            <div><strong>Company:</strong> Peachy Keen Cleaners LLC</div>
+            <div><strong>Phone:</strong> <a href="tel:+17657772646">+1 765‑777‑2646</a></div>
+            <div><strong>Email:</strong> <a href="mailto:support@halvynor.shop">support@halvynor.shop</a></div>
+            <div><strong>Domain:</strong> Home Cleaning</div>
+            <div><strong>Address:</strong> MARKET ST, SAN FRANCISCO, CA 94105, United States</div>
+          </div>
+          <div style="margin-top:1rem;overflow:hidden;border-radius:12px;border:1px solid var(--line)">
+            <iframe title="San Francisco 94105 map" width="100%" height="260" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=San%20Francisco%2094105&output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+      <div>© <span id="year"></span> Peachy Keen Cleaners LLC. All rights reserved.</div>
+      <div style="display:flex;gap:.6rem"><a href="#">Privacy</a>·<a href="#">Terms</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // IntersectionObserver reveal-on-scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple mailto handler (no backend required)
+    document.getElementById('contactForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('msg').value.trim();
+      const subject = encodeURIComponent('New Cleaning Request from ' + name);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nMessage: ${msg}`);
+      window.location.href = `mailto:support@halvynor.shop?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
